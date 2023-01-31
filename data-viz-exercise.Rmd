@@ -1,0 +1,139 @@
+---
+title: "Visualizing Earth-Observing Satellites"
+author: "Gavin McNicol"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    toc: yes
+    toc_float: yes
+---
+
+```{r load-packages, include=FALSE}
+library(tidyverse)
+```
+
+### Read in data
+
+This exercise uses data from [The Union of Concerned Scientists (UCS) Satellite Database](https://www.ucsusa.org/satellite_database).
+The UCS Satellite Database is a listing of active satellites currently in orbit around the Earth.
+
+```{r load-data}
+satellites <- read.csv("UCS-Satellite-Database-1-1-2021.csv") 
+```
+
+### Glimpse the satellites data frame.
+
+```{r glimpse-satellites}
+glimpse(satellites)
+```
+
+### Exercise 1.
+
+Modify the following plot to change the color of all points to `"pink"`.
+
+```{r scatterplot}
+ggplot(satellites, 
+       aes(x = perigee_km, y = period_minutes, color = country_origin)) +
+  geom_point(color = "blue")
+```
+
+### Exercise 2.
+
+Add labels for title, x and y axes, and size of points.
+Uncomment to see the effect.
+
+```{r scatterplot-labels}
+ggplot(satellites, 
+       aes(x = perigee_km, y = period_minutes, color = country_origin)) +
+  geom_point(color = "blue") +
+  labs(
+    #title = "___",
+    #x = "___", 
+    #y = "___",
+    #___
+    )
+```
+
+### Exercise 3.
+
+Pick a single categorical variable from the data set and make a bar plot of its distribution.
+
+Pick one from:
+
+-   `country_origin`
+-   `country_operator`
+-   `user`
+-   `purpose`
+-   `orbit_class`
+-   `launch_site`
+
+(A little bit of starter code is provided below, and the code chunk is set to not be evaluated with `eval = FALSE` because the current code in there is not valid code and hence the document wouldn't knit. Once you replace the code with valid code, set the chunk option to `eval = TRUE`, or remove the `eval` option altogether since it's set to `TRUE` by default.)
+
+```{r barplot, eval = FALSE}
+ggplot(satellites, aes(___)) +
+  geom____ +
+  coord_flip()
+```
+
+### Exercise 4.
+
+Pick a single numerical variable and make a histogram of it.
+
+Pick one from:
+
+-   `longitude_geo_degrees`
+-   `perigee_km`
+-   `apogee_km`
+-   `period_minutes`
+-   `expected_lifetime_yrs`
+
+(This time no starter code is provided, you're on your own!)
+
+```{r histogram}
+
+```
+
+### Exercise 5.
+
+Pick a numerical variable and plot it against `orbial_class` () and make a visualisation (you pick the type!) to visualise the relationship between the two variables.
+Along with your code and output, provide an interpretation of the visualisation.
+
+To help with the following interpretations, read the text from the **UCS Satellite Database User Guide** describing the different kind of orbits.
+
+**We divide satellite orbits into two broad classes:**
+
+1.  nearly circular orbits
+2.  elliptical orbits
+
+Satellites in elliptical orbits have **apogees** (greatest distance from Earth during orbit) and **perigees** (shortest distance to Earth during orbit) that differ significantly from each other and they spend time at many different altitudes above the earth's surface.
+We categorize satellite orbits with **eccentricity** less than 0.14 as nearly circular, and those with eccentricity 0.14 and higher as **elliptical**.
+The definition of eccentricity and the rationale for this division are included in the appendix.
+
+Nearly Circular Orbits are further classified by their altitude:
+
+-   **Low Earth Orbit (LEO)** refers to orbits with altitudes between 80 km and roughly 1,700 km, where the upper altitude is chosen to correspond to an orbital period of 2 hours.
+-   **Medium Earth Orbit (MEO)** refers to orbits with altitudes greater than 1700 km and less than 35,700, corresponding to orbital periods between 2 and 24 hours. The most important region of this band is near 20,000 km, which corresponds to semi-synchronous orbits (12-hour period).
+-   **Geosynchronous Orbit (GEO)** refers to orbits with altitudes of approximately 35,700 kilometers, which corresponds to an orbital period of approximately 24 hours, allowing these satellites to appear nearly stationary as viewed from the earth.
+
+```{r num-cat}
+
+```
+
+### Exercise 6.
+
+Pick `orbital_class` and a second categorical variable and make a visualisation to visualise the relationship between the two variables.
+Along with your code and output, provide an interpretation of the visualisation.
+
+If the legend takes up a lot of space, you may need to use the *Show in New Window* button at the top right of the plot box to view the figure more clearly.
+
+```{r cat-cat}
+
+```
+
+### Exercise 7.
+
+Pick two numerical variables, `orbit_class` and a second categorical variables and make a visualisation that incorportes all of them and provide an interpretation with your answer.
+
+```{r multi}
+
+```
